@@ -1,8 +1,8 @@
 <?php
 
-namespace mtphp\ArrayManipulation\Tests;
+namespace MulerTech\ArrayManipulation\Tests;
 
-use mtphp\ArrayManipulation\ArrayManipulation;
+use MulerTech\ArrayManipulation\ArrayManipulation;
 use PHPUnit\Framework\TestCase;
 
 class ArrayManipulationTest extends TestCase

@@ -1,6 +1,6 @@
 <?php
 
-namespace mtphp\ArrayManipulation;
+namespace MulerTech\ArrayManipulation;
 
 use RuntimeException;
 
