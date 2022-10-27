@@ -6,7 +6,7 @@ use RuntimeException;
 
 /**
  * Class ArrayManipulation
- * @package mtphp\ArrayManipulation
+ * @package MulerTech\ArrayManipulation
  * @author Sébastien Muler
  */
 class ArrayManipulation
