@@ -1,0 +1,20 @@
+{
+  "name": "mulertech/array-manipulation",
+  "description": "This class manipulates and organizes arrays",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sébastien Muler",
+      "email": "sebastien.muler@mulertech.net"
+    }
+  ],
+  "require-dev": {
+    "phpunit/phpunit": "^9"
+  },
+  "autoload": {
+    "psr-4": {
+      "MulerTech\\Application\\": "./"
+    }
+  }
+}

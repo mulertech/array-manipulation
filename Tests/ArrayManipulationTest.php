@@ -28,11 +28,11 @@ class ArrayManipulationTest extends TestCase
 
     public function testFindDifferencesByName()
     {
-        $first = ['akey' => 'avalue', 'anotherkey' => 'secondvalue', 'thirdkey' => 'value'];
-        $second = ['akey' => 'avalue', 'anotherkey' => 'notsamevalue', 'thirdkey' => 'differentvalue'];
+        $first = ['akey' => 'avalue', 'anotherkey' => 'secondvalue', 'thirdkey' => 'oldvalue'];
+        $second = ['akey' => 'avalue', 'anotherkey' => 'notsamevalue', 'thirdkey' => 'newvalue'];
         $expected = [
-            'anotherkey' => [0 => 'secondvalue', 1 => 'notsamevalue'],
-            'thirdkey' => [0 => 'value', 1 => 'differentvalue']
+            'anotherkey' => ['secondvalue', 'notsamevalue'],
+            'thirdkey' => ['oldvalue', 'newvalue']
         ];
         static::assertEquals($expected, ArrayManipulation::findDifferencesByName($first, $second));
     }

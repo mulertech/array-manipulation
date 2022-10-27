@@ -37,21 +37,25 @@ class ArrayManipulation
     }
 
     /**
+     * Add a number key and the current number :
+     * Example : [0 => ['name' => 'toto'], 1 => ['name' => 'titi']]
+     * Becomes : [0 => ['name' => 'toto', 'number' => 1], 1 => ['name' => 'titi', 'number' => 2]]
      * @param array $array
-     * @param string $index_number
+     * @param string $indexNumber
      * @return array
      */
-    public static function addNumberKey(array $array, string $index_number = 'number'): array
+    public static function addNumberKey(array $array, string $indexNumber = 'number'): array
     {
         $i = 1;
         foreach ($array as &$value) {
-            $value[$index_number] = $i++;
+            $value[$indexNumber] = $i++;
         }
         return $array;
     }
 
-    /** Find differences between first and second array
-     * array : [key_name => [0 => first_value, 1 => second_value]]
+    /**
+     * Find differences between first and second array
+     * Return array : [key_name => [first_value, second_value]]
      * @param array $first
      * @param array $second
      * @return array
