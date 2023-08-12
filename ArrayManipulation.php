@@ -19,7 +19,7 @@ class ArrayManipulation
      */
     public function isAssociativeArray(array $array): bool
     {
-        return !array_key_exists(0, $array);
+        return count(array_filter(array_keys($array), 'is_string')) > 0;
     }
 
     /**
@@ -29,11 +29,17 @@ class ArrayManipulation
      */
     public static function listOfDuplicates(array $array = []): array
     {
+        $duplicates = [];
+
         if (!empty($array)) {
-            $count_values = array_count_values($array);
-            return array_keys($count_values, 2);
+            foreach (array_count_values($array) as $value => $count) {
+                if ($count > 1) {
+                    $duplicates[] = $value;
+                }
+            }
         }
-        return [];
+
+        return $duplicates;
     }
 
     /**
@@ -46,11 +52,10 @@ class ArrayManipulation
      */
     public static function addNumberKey(array $array, string $indexNumber = 'number'): array
     {
-        $i = 1;
-        foreach ($array as &$value) {
-            $value[$indexNumber] = $i++;
-        }
-        return $array;
+        return array_map(function ($value) use (&$i, $indexNumber) {
+            $value[$indexNumber] = ++$i;
+            return $value;
+        }, $array);
     }
 
     /**
