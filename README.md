@@ -15,7 +15,7 @@ ___
 Add to your "**composer.json**" file into require section :
 
 ```
-"mulertech/array-manipulation": "^1.0"
+"mulertech/array-manipulation": "^2.0"
 ```
 
 and run the command :
@@ -28,12 +28,32 @@ php composer.phar update
 Run the command :
 
 ```
-php composer.phar require mulertech/array-manipulation "^1.0"
+php composer.phar require mulertech/array-manipulation "^2.0"
 ```
 
 ___
 
 ## Usage
+
+<br>
+
+###### _Check if an array is associative or not :_
+
+```
+ArrayManipulation::isAssoc([['name' => 'john'], ['name' => 'jack']]);
+
+// true
+```
+
+<br>
+
+###### _Check if an array is list or not :_
+
+```
+ArrayManipulation::isList([1, 2, 3, 4, 5]);
+
+// true
+```
 
 <br>
 
@@ -50,9 +70,9 @@ ArrayManipulation::listOfDuplicates([1, 2, 3, 33, 8, 33, 4, 806, 402, 806]);
 ###### _Add a "number" key (or another name) and its number into an associative array :_
 
 ```
-ArrayManipulation::addNumberKey([0 => ['name' => 'toto'], 1 => ['name' => 'titi']]);
+ArrayManipulation::addNumberKey([['name' => 'john'], ['name' => 'jack']]);
 
-// [0 => ['name' => 'toto', 'number' => 1], 1 => ['name' => 'titi', 'number' => 2]]
+// [['name' => 'john', 'number' => 1], ['name' => 'jack', 'number' => 2]]
 ```
 
 <br>
@@ -64,8 +84,7 @@ $first =  ['akey' => 'avalue', 'anotherkey' => 'secondvalue',  'thirdkey' => 'ol
 $second = ['akey' => 'avalue', 'anotherkey' => 'notsamevalue', 'thirdkey' => 'newvalue'];
 ArrayManipulation::findDifferencesByName($first, $second);
 
-//['anotherkey' => ['secondvalue', 'notsamevalue'],
-   'thirdkey' =>   ['oldvalue', 'newvalue']];
+// ['anotherkey' => ['secondvalue', 'notsamevalue'], 'thirdkey' => ['oldvalue', 'newvalue']];
 ```
 
 <br>
@@ -74,23 +93,23 @@ ArrayManipulation::findDifferencesByName($first, $second);
 
 ```
 $array = [
-            0 => ['firstcolumn' => 'apple', 'secondcolumn' => 'zorro', 'thirdcolumn' => 'masked man'],
-            1 => ['firstcolumn' => 'banana', 'secondcolumn' => 'superman', 'thirdcolumn' => 'masked man'],
-            2 => ['firstcolumn' => 'cherry', 'secondcolumn' => 'batman', 'thirdcolumn' => 'masked man'],
-            3 => ['firstcolumn' => 'coconut', 'secondcolumn' => 'alibaba', 'thirdcolumn' => 'unmasked man'],
-            4 => ['firstcolumn' => 'pineapple', 'secondcolumn' => 'Tom sawyer', 'thirdcolumn' => 'unmasked man']
-        ];
+    ['firstcolumn' => 'apple', 'secondcolumn' => 'zorro', 'thirdcolumn' => 'masked man'],
+    ['firstcolumn' => 'banana', 'secondcolumn' => 'superman', 'thirdcolumn' => 'masked man'],
+    ['firstcolumn' => 'cherry', 'secondcolumn' => 'batman', 'thirdcolumn' => 'masked man'],
+    ['firstcolumn' => 'coconut', 'secondcolumn' => 'alibaba', 'thirdcolumn' => 'unmasked man'],
+    ['firstcolumn' => 'pineapple', 'secondcolumn' => 'Tom sawyer', 'thirdcolumn' => 'unmasked man']
+];
 
 ArrayManipulation::orderByColumn($array, 'thirdcolumn', 'desc', 'secondcolumn'); // default order is asc
 
-//Result :
+// result :
 [
-            0 => ['firstcolumn' => 'coconut', 'secondcolumn' => 'alibaba', 'thirdcolumn' => 'unmasked man'],
-            1 => ['firstcolumn' => 'pineapple', 'secondcolumn' => 'Tom sawyer', 'thirdcolumn' => 'unmasked man'],
-            2 => ['firstcolumn' => 'cherry', 'secondcolumn' => 'batman', 'thirdcolumn' => 'masked man'],
-            3 => ['firstcolumn' => 'banana', 'secondcolumn' => 'superman', 'thirdcolumn' => 'masked man'],
-            4 => ['firstcolumn' => 'apple', 'secondcolumn' => 'zorro', 'thirdcolumn' => 'masked man']
-        ];
+    ['firstcolumn' => 'coconut', 'secondcolumn' => 'alibaba', 'thirdcolumn' => 'unmasked man'],<br>
+    ['firstcolumn' => 'pineapple', 'secondcolumn' => 'Tom sawyer', 'thirdcolumn' => 'unmasked man'],<br>
+    ['firstcolumn' => 'cherry', 'secondcolumn' => 'batman', 'thirdcolumn' => 'masked man'],<br>
+    ['firstcolumn' => 'banana', 'secondcolumn' => 'superman', 'thirdcolumn' => 'masked man'],<br>
+    ['firstcolumn' => 'apple', 'secondcolumn' => 'zorro', 'thirdcolumn' => 'masked man'],<br>
+];
 ```
 
 <br>
@@ -102,97 +121,97 @@ ArrayManipulation::orderByColumn($array, 'thirdcolumn', 'desc', 'secondcolumn');
 
 ```
 $array = [
-            'subtest1' => [
-                'subsubtest1' => 'a value',
-                'subsubtest2' => 'b value',
-                'subsubtest3' => 'c value'
-            ],
-            'subtest2' => [
-                'subsubsecondtest1' => 'another value a',
-                'subsubsecondtest2' => 'another value b',
-                'subsubsecondtest3' => 'another value c',
-                'subsubsecondtest4' => 'another value d',
-            ],
-            'subtest3' => [
-                'othersub' => [
-                    'subsubsub1' => 'value a',
-                    'subsubsub2' => 'value b'
-                ]
-            ]
-        ];
+    'subtest1' => [
+        'subsubtest1' => 'a value',
+        'subsubtest2' => 'b value',
+        'subsubtest3' => 'c value'
+    ],
+    'subtest2' => [
+        'subsubsecondtest1' => 'another value a',
+        'subsubsecondtest2' => 'another value b',
+        'subsubsecondtest3' => 'another value c',
+        'subsubsecondtest4' => 'another value d',
+    ],
+    'subtest3' => [
+        'othersub' => [
+            'subsubsub1' => 'value a',
+            'subsubsub2' => 'value b'
+        ]
+    ]
+];
 
 ArrayManipulation::addKeyValue($array, 'keytoaddvalue', ['a first value'], 'subtest3', 'othersub');
 
-//Result :
+// result :
 [
-            'subtest1' => [
-                'subsubtest1' => 'a value',
-                'subsubtest2' => 'b value',
-                'subsubtest3' => 'c value'
-            ],
-            'subtest2' => [
-                'subsubsecondtest1' => 'another value a',
-                'subsubsecondtest2' => 'another value b',
-                'subsubsecondtest3' => 'another value c',
-                'subsubsecondtest4' => 'another value d',
-            ],
-            'subtest3' => [
-                'othersub' => [
-                    'subsubsub1' => 'value a',
-                    'subsubsub2' => 'value b',
-                    'keytoaddvalue' => ['a first value']
-                ]
-            ]
-        ];
+    'subtest1' => [
+        'subsubtest1' => 'a value',
+        'subsubtest2' => 'b value',
+        'subsubtest3' => 'c value'
+    ],
+    'subtest2' => [
+        'subsubsecondtest1' => 'another value a',
+        'subsubsecondtest2' => 'another value b',
+        'subsubsecondtest3' => 'another value c',
+        'subsubsecondtest4' => 'another value d',
+    ],
+    'subtest3' => [
+        'othersub' => [
+            'subsubsub1' => 'value a',
+            'subsubsub2' => 'value b',
+            'keytoaddvalue' => ['a first value']
+        ]
+    ]
+];
 ```
 
 2. Add a value to an existing key :
 
 ```
 $array = [
-            'subtest1' => [
-                'subsubtest1' => 'a value',
-                'subsubtest2' => 'b value',
-                'subsubtest3' => 'c value'
-            ],
-            'subtest2' => [
-                'subsubsecondtest1' => 'another value a',
-                'subsubsecondtest2' => 'another value b',
-                'subsubsecondtest3' => 'another value c',
-                'subsubsecondtest4' => 'another value d',
-            ],
-            'subtest3' => [
-                'othersub' => [
-                    'subsubsub1' => 'value a',
-                    'subsubsub2' => 'value b',
-                    'keytoaddvalue' => ['a first value']
-                ]
-            ]
-        ];
+    'subtest1' => [
+        'subsubtest1' => 'a value',
+        'subsubtest2' => 'b value',
+        'subsubtest3' => 'c value'
+    ],
+    'subtest2' => [
+        'subsubsecondtest1' => 'another value a',
+        'subsubsecondtest2' => 'another value b',
+        'subsubsecondtest3' => 'another value c',
+        'subsubsecondtest4' => 'another value d',
+    ],
+    'subtest3' => [
+        'othersub' => [
+            'subsubsub1' => 'value a',
+            'subsubsub2' => 'value b',
+            'keytoaddvalue' => ['a first value']
+        ]
+    ]
+];
 
 ArrayManipulation::addKeyValue($array, 'keytoaddvalue', 'an other value', 'subtest3', 'othersub');
 
-//Result :
+// result :
 [
-            'subtest1' => [
-                'subsubtest1' => 'a value',
-                'subsubtest2' => 'b value',
-                'subsubtest3' => 'c value'
-            ],
-            'subtest2' => [
-                'subsubsecondtest1' => 'another value a',
-                'subsubsecondtest2' => 'another value b',
-                'subsubsecondtest3' => 'another value c',
-                'subsubsecondtest4' => 'another value d',
-            ],
-            'subtest3' => [
-                'othersub' => [
-                    'subsubsub1' => 'value a',
-                    'subsubsub2' => 'value b',
-                    'keytoaddvalue' => ['a first value', 'an other value']
-                ]
-            ]
-        ];
+    'subtest1' => [
+        'subsubtest1' => 'a value',
+        'subsubtest2' => 'b value',
+        'subsubtest3' => 'c value'
+    ],
+    'subtest2' => [
+        'subsubsecondtest1' => 'another value a',
+        'subsubsecondtest2' => 'another value b',
+        'subsubsecondtest3' => 'another value c',
+        'subsubsecondtest4' => 'another value d',
+    ],
+    'subtest3' => [
+        'othersub' => [
+            'subsubsub1' => 'value a',
+            'subsubsub2' => 'value b',
+            'keytoaddvalue' => ['a first value', 'an other value']
+        ]
+    ]
+];
 ```
 
 <br>
@@ -223,24 +242,24 @@ $array = [
 
 ArrayManipulation::removeKey($array, 'subtest3', 'othersub', 'keytoremove');
 
-//Result :
+// Result :
 [
-            'subtest1' => [
-                'subsubtest1' => 'a value',
-                'subsubtest2' => 'b value',
-                'subsubtest3' => 'c value'
-            ],
-            'subtest2' => [
-                'subsubsecondtest1' => 'another value a',
-                'subsubsecondtest2' => 'another value b',
-                'subsubsecondtest3' => 'another value c',
-                'subsubsecondtest4' => 'another value d',
-            ],
-            'subtest3' => [
-                'othersub' => [
-                    'subsubsub1' => 'value a',
-                    'subsubsub2' => 'value b',
-                ]
-            ]
-        ];
+    'subtest1' => [
+        'subsubtest1' => 'a value',
+        'subsubtest2' => 'b value',
+        'subsubtest3' => 'c value'
+    ],
+    'subtest2' => [
+        'subsubsecondtest1' => 'another value a',
+        'subsubsecondtest2' => 'another value b',
+        'subsubsecondtest3' => 'another value c',
+        'subsubsecondtest4' => 'another value d',
+    ],
+    'subtest3' => [
+        'othersub' => [
+            'subsubsub1' => 'value a',
+            'subsubsub2' => 'value b',
+        ]
+    ]
+];
 ```
