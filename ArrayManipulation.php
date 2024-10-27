@@ -11,15 +11,22 @@ use RuntimeException;
  */
 class ArrayManipulation
 {
-
+    /**
+     * @param array $array
+     * @return bool
+     */
+    public static function isAssoc(array $array): bool
+    {
+        return !array_is_list($array);
+    }
 
     /**
      * @param array $array
      * @return bool
      */
-    public function isAssociativeArray(array $array): bool
+    public static function isList(array $array): bool
     {
-        return count(array_filter(array_keys($array), 'is_string')) > 0;
+        return array_is_list($array);
     }
 
     /**
@@ -52,7 +59,7 @@ class ArrayManipulation
      */
     public static function addNumberKey(array $array, string $indexNumber = 'number'): array
     {
-        return array_map(function ($value) use (&$i, $indexNumber) {
+        return array_map(static function ($value) use (&$i, $indexNumber) {
             $value[$indexNumber] = ++$i;
             return $value;
         }, $array);
@@ -123,7 +130,7 @@ class ArrayManipulation
      * @param string ...$index
      * @return array
      */
-    public static function addKeyValue(array $array, string $key, $value, string ...$index): array
+    public static function addKeyValue(array $array, string $key, mixed $value, string ...$index): array
     {
         if (empty($index)) {
             throw new RuntimeException('Class ArrayManipulation, function addKeyValue. At least one argument $index is required.');

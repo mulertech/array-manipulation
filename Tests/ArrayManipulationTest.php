@@ -7,6 +7,15 @@ use PHPUnit\Framework\TestCase;
 
 class ArrayManipulationTest extends TestCase
 {
+    public function testIsAssociative()
+    {
+        static::assertTrue(ArrayManipulation::isAssoc(['a' => 'b', 'c' => 'd']));
+    }
+
+    public function testIsList()
+    {
+        static::assertTrue(ArrayManipulation::isList([0 => 'a', 1 => 'b', 2 => 'c']));
+    }
 
     public function testAddNumberKey()
     {
