@@ -36,17 +36,7 @@ class ArrayManipulation
      */
     public static function listOfDuplicates(array $array = []): array
     {
-        $duplicates = [];
-
-        if (!empty($array)) {
-            foreach (array_count_values($array) as $value => $count) {
-                if ($count > 1) {
-                    $duplicates[] = $value;
-                }
-            }
-        }
-
-        return $duplicates;
+        return array_values(array_diff_assoc($array, array_unique($array)));
     }
 
     /**
@@ -59,10 +49,19 @@ class ArrayManipulation
      */
     public static function addNumberKey(array $array, string $indexNumber = 'number'): array
     {
-        return array_map(static function ($value) use (&$i, $indexNumber) {
-            $value[$indexNumber] = ++$i;
-            return $value;
-        }, $array);
+        if (self::isAssoc($array)) {
+            throw new RuntimeException(
+                'Class ArrayManipulation, function addNumberKey. The array must be a list.'
+            );
+        }
+
+        return array_map(
+            static function ($value) use (&$i, $indexNumber) {
+                $value[$indexNumber] = ++$i;
+                return $value;
+            },
+            $array
+        );
     }
 
     /**
@@ -76,11 +75,13 @@ class ArrayManipulation
     {
         $differences = [];
         $first = array_diff_assoc($first, $second);
+
         foreach ($first as $key => $value) {
             if ($value !== $second[$key]) {
                 $differences[$key] = [$value, $second[$key]];
             }
         }
+
         return $differences;
     }
 
@@ -88,37 +89,39 @@ class ArrayManipulation
      * @param array $array
      * @param string $column
      * @param string $order 'asc' or 'desc' order
-     * @param string|null $second_column
-     * @param string|null $second_order
+     * @param string|null $secondColumn
+     * @param string|null $secondOrder
      * @return array
      */
     public static function orderByColumn(
         array $array,
         string $column,
         string $order = 'asc',
-        string $second_column = null,
-        string $second_order = null
+        ?string $secondColumn = null,
+        ?string $secondOrder = null
     ): array {
-        $array_column = array_column($array, $column);
-        if (empty($second_column)) {
-            array_multisort(
-                $array_column,
-                (strtolower($order) === 'asc') ? SORT_ASC : SORT_DESC,
-                 SORT_FLAG_CASE | SORT_STRING,
-                $array
-            );
-        } else {
-            $array_second_column = array_column($array, $second_column);
-            array_multisort(
-                $array_column,
-                (strtolower($order) === 'asc') ? SORT_ASC : SORT_DESC,
-                SORT_FLAG_CASE | SORT_STRING,
-                $array_second_column,
-                (!empty($second_order) && strtolower($second_order) === 'desc') ? SORT_DESC : SORT_ASC,
-                SORT_FLAG_CASE | SORT_STRING,
-                $array
-            );
+        $arrayColumn = array_column($array, $column);
+        $sortOrder = (strtolower($order) === 'asc') ? SORT_ASC : SORT_DESC;
+        $sortFlag = SORT_FLAG_CASE | SORT_STRING;
+
+        if ($secondColumn === null) {
+            array_multisort($arrayColumn, $sortOrder, $sortFlag, $array);
+
+            return $array;
         }
+
+        $secondSort = ($secondOrder !== null && strtolower($secondOrder) === 'desc') ? SORT_DESC : SORT_ASC;
+
+        array_multisort(
+            $arrayColumn,
+            $sortOrder,
+            $sortFlag,
+            array_column($array, $secondColumn),
+            $secondSort,
+            $sortFlag,
+            $array
+        );
+
         return $array;
     }
 
@@ -133,20 +136,19 @@ class ArrayManipulation
     public static function addKeyValue(array $array, string $key, mixed $value, string ...$index): array
     {
         if (empty($index)) {
-            throw new RuntimeException('Class ArrayManipulation, function addKeyValue. At least one argument $index is required.');
-        }
-        $firstIndex = array_shift($index);
-        if (empty($index)) {
-            //Numeric array
-            if (isset($array[$firstIndex][$key]) && is_array($array[$firstIndex][$key]) && array_key_exists(0, $array[$firstIndex][$key])) {
-                $array[$firstIndex][$key][] = $value;
+            if (isset($array[$key]) && self::isList($array[$key])) {
+                $array[$key][] = $value;
                 return $array;
             }
-            //Associative array
-            $array[$firstIndex][$key] = $value;
+
+            $array[$key] = $value;
             return $array;
         }
-        $array[$firstIndex] = self::addKeyValue(...array_merge([$array[$firstIndex]], [$key], [$value], $index));
+
+        $firstIndex = array_shift($index);
+
+        $array[$firstIndex] = self::addKeyValue($array[$firstIndex], $key, $value, ...$index);
+
         return $array;
     }
 
@@ -159,16 +161,21 @@ class ArrayManipulation
     public static function removeKey(array $array, string ...$index): array
     {
         if (empty($index)) {
-            throw new RuntimeException('Class ArrayManipulation, function removeKey. At least one argument $index is required.');
-        }
-        $firstIndex = array_shift($index);
-        if (empty($index)) {
-            if (!empty($array[$firstIndex])) {
-                unset($array[$firstIndex]);
-            }
             return $array;
         }
-        $array[$firstIndex] = self::removeKey(...array_merge([$array[$firstIndex]], $index));
+
+        $firstIndex = array_shift($index);
+
+        if (!empty($index) && !empty($array[$firstIndex])) {
+            $array[$firstIndex] = self::removeKey($array[$firstIndex], ...$index);
+
+            return $array;
+        }
+
+        if (!empty($array[$firstIndex])) {
+            unset($array[$firstIndex]);
+        }
+
         return $array;
     }
 }

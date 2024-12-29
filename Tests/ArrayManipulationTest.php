@@ -84,6 +84,50 @@ class ArrayManipulationTest extends TestCase
         static::assertEquals($expected, ArrayManipulation::orderByColumn($array, 'thirdcolumn', 'desc', 'secondcolumn'));
     }
 
+    public function testAddValueInAssociativeSimpleArray()
+    {
+        $test = ['key' => 'value'];
+        $expected = ['key' => 'value', 'keytoadd' => 'value to add'];
+
+        $this->assertEquals($expected, ArrayManipulation::addKeyValue($test, 'keytoadd', 'value to add'));
+    }
+
+    public function testAddValueInAssociativeArray()
+    {
+        $test = [
+            'key'=> [
+                'subKey' => 'subValue'
+            ],
+        ];
+
+        $expected = [
+            'key'=> [
+                'subKey' => 'subValue',
+                'subKeyToAdd' => 'value to add'
+            ],
+        ];
+
+        $this->assertEquals($expected, ArrayManipulation::addKeyValue($test, 'subKeyToAdd', 'value to add', 'key'));
+    }
+
+    public function testAddValueInNumericArray()
+    {
+        $test = [
+            'key'=> [
+                'value'
+            ],
+        ];
+
+        $expected = [
+            'key'=> [
+                'value',
+                'value to add'
+            ],
+        ];
+
+        $this->assertEquals($expected, ArrayManipulation::addKeyValue($test, 'key', 'value to add'));
+    }
+
     public function testAddKeyValue()
     {
         $test = [
@@ -217,6 +261,14 @@ class ArrayManipulationTest extends TestCase
         $this->assertEquals($expected, ArrayManipulation::addKeyValue($test, 'keytoaddvalue', 'an other value', 'subtest3', 'othersub'));
     }
 
+    public function testRemoveSimpleKey()
+    {
+        $test = [
+            'key' => 'value',
+        ];
+
+        $this->assertEquals([], ArrayManipulation::removeKey($test, 'key'));
+    }
     public function testRemoveKey()
     {
         $test = [
@@ -269,18 +321,6 @@ class ArrayManipulationTest extends TestCase
                 'subsubtest2' => 'b value',
                 'subsubtest3' => 'c value'
             ],
-            'subtest2' => [
-                'subsubsecondtest1' => 'another value a',
-                'subsubsecondtest2' => 'another value b',
-                'subsubsecondtest3' => 'another value c',
-                'subsubsecondtest4' => 'another value d',
-            ],
-            'subtest3' => [
-                'othersub' => [
-                    'subsubsub1' => 'value a',
-                    'subsubsub2' => 'value b'
-                ]
-            ]
         ];
         $expected = [
             'subtest1' => [
@@ -288,18 +328,6 @@ class ArrayManipulationTest extends TestCase
                 'subsubtest2' => 'b value',
                 'subsubtest3' => 'c value'
             ],
-            'subtest2' => [
-                'subsubsecondtest1' => 'another value a',
-                'subsubsecondtest2' => 'another value b',
-                'subsubsecondtest3' => 'another value c',
-                'subsubsecondtest4' => 'another value d',
-            ],
-            'subtest3' => [
-                'othersub' => [
-                    'subsubsub1' => 'value a',
-                    'subsubsub2' => 'value b',
-                ]
-            ]
         ];
         $this->assertEquals($expected, ArrayManipulation::removeKey($test, 'subtest3', 'othersub', 'keytoremove'));
     }
