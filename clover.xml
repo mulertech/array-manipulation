@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1736709858">
-  <project timestamp="1736709858">
+<coverage generated="1736710130">
+  <project timestamp="1736710130">
     <package name="MulerTech\ArrayManipulation">
       <file name="/home/runner/work/array-manipulation/array-manipulation/src/ArrayManipulation.php">
         <class name="MulerTech\ArrayManipulation\ArrayManipulation" namespace="MulerTech\ArrayManipulation">
