@@ -83,7 +83,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           tools: composer:v2
-          coverage: none
+          coverage: xdebug
 
       - name: Set PHPUnit
         uses: nick-fields/retry@v3
