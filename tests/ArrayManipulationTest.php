@@ -25,6 +25,12 @@ class ArrayManipulationTest extends TestCase
         );
     }
 
+    public function testAddNumberKeyWithoutListArray()
+    {
+        static::expectExceptionMessage('Class ArrayManipulation, function addNumberKey. The array must be a list.');
+        ArrayManipulation::addNumberKey(['name' => 'toto']);
+    }
+
     public function testListOfDuplicates()
     {
         static::assertEquals([33, 806], ArrayManipulation::listOfDuplicates([1, 2, 3, 33, 8, 33, 4, 806, 402, 806]));
@@ -330,5 +336,10 @@ class ArrayManipulationTest extends TestCase
             ],
         ];
         $this->assertEquals($expected, ArrayManipulation::removeKey($test, 'subtest3', 'othersub', 'keytoremove'));
+    }
+
+    public function testRemoveKeyWithoutIndex()
+    {
+        $this->assertEquals(['test'], ArrayManipulation::removeKey(['test']));
     }
 }

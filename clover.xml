@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1736710130">
-  <project timestamp="1736710130">
+<coverage generated="1736711039">
+  <project timestamp="1736711039">
     <package name="MulerTech\ArrayManipulation">
-      <file name="/home/runner/work/array-manipulation/array-manipulation/src/ArrayManipulation.php">
+      <file name="/var/www/html/src/ArrayManipulation.php">
         <class name="MulerTech\ArrayManipulation\ArrayManipulation" namespace="MulerTech\ArrayManipulation">
-          <metrics complexity="22" methods="8" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="55" coveredstatements="51" elements="63" coveredelements="57"/>
+          <metrics complexity="22" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="55" coveredstatements="55" elements="63" coveredelements="63"/>
         </class>
-        <line num="18" type="method" name="isAssoc" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="20" type="stmt" count="2"/>
+        <line num="18" type="method" name="isAssoc" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="20" type="stmt" count="3"/>
         <line num="27" type="method" name="isList" visibility="public" complexity="1" crap="1" count="3"/>
         <line num="29" type="stmt" count="3"/>
         <line num="37" type="method" name="listOfDuplicates" visibility="public" complexity="1" crap="1" count="2"/>
         <line num="39" type="stmt" count="2"/>
-        <line num="50" type="method" name="addNumberKey" visibility="public" complexity="2" crap="2.08" count="1"/>
-        <line num="52" type="stmt" count="1"/>
-        <line num="53" type="stmt" count="0"/>
-        <line num="54" type="stmt" count="0"/>
-        <line num="55" type="stmt" count="0"/>
+        <line num="50" type="method" name="addNumberKey" visibility="public" complexity="2" crap="2" count="2"/>
+        <line num="52" type="stmt" count="2"/>
+        <line num="53" type="stmt" count="1"/>
+        <line num="54" type="stmt" count="1"/>
+        <line num="55" type="stmt" count="1"/>
         <line num="58" type="stmt" count="1"/>
         <line num="59" type="stmt" count="1"/>
         <line num="60" type="stmt" count="1"/>
@@ -59,9 +59,9 @@
         <line num="148" type="stmt" count="4"/>
         <line num="150" type="stmt" count="4"/>
         <line num="152" type="stmt" count="4"/>
-        <line num="161" type="method" name="removeKey" visibility="public" complexity="5" crap="5.03" count="3"/>
-        <line num="163" type="stmt" count="3"/>
-        <line num="164" type="stmt" count="0"/>
+        <line num="161" type="method" name="removeKey" visibility="public" complexity="5" crap="5" count="4"/>
+        <line num="163" type="stmt" count="4"/>
+        <line num="164" type="stmt" count="1"/>
         <line num="167" type="stmt" count="3"/>
         <line num="169" type="stmt" count="3"/>
         <line num="170" type="stmt" count="1"/>
@@ -69,9 +69,9 @@
         <line num="175" type="stmt" count="3"/>
         <line num="176" type="stmt" count="2"/>
         <line num="179" type="stmt" count="3"/>
-        <metrics loc="182" ncloc="127" classes="1" methods="8" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="55" coveredstatements="51" elements="63" coveredelements="57"/>
+        <metrics loc="182" ncloc="127" classes="1" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="55" coveredstatements="55" elements="63" coveredelements="63"/>
       </file>
     </package>
-    <metrics files="1" loc="182" ncloc="127" classes="1" methods="8" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="55" coveredstatements="51" elements="63" coveredelements="57"/>
+    <metrics files="1" loc="182" ncloc="127" classes="1" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="55" coveredstatements="55" elements="63" coveredelements="63"/>
   </project>
 </coverage>
