@@ -13,13 +13,20 @@
     "php": "^8.2"
   },
   "require-dev": {
-    "mulertech/docker-tests": "^1.0",
-    "phpunit/phpunit": "^10|^11",
+    "friendsofphp/php-cs-fixer": "^3.6",
+    "mulertech/docker-tests": "^1",
+    "phpstan/phpstan": "^2.1",
+    "phpunit/phpunit": "^11",
     "roave/security-advisories": "dev-latest"
   },
   "autoload": {
     "psr-4": {
-      "MulerTech\\ArrayManipulation\\": "./"
+      "MulerTech\\ArrayManipulation\\": "./src"
     }
-  }
+  },
+    "autoload-dev": {
+        "psr-4": {
+        "MulerTech\\ArrayManipulation\\Tests\\": "./tests"
+        }
+    }
 }

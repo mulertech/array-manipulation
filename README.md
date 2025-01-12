@@ -2,6 +2,12 @@
 # ArrayManipulation
 
 ___
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/mulertech/array-manipulation.svg?style=flat-square)](https://packagist.org/packages/mulertech/array-manipulation)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/mulertech/array-manipulation/tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/mulertech/array-manipulation/actions/workflows/tests.yml)
+[![GitHub PHPStan Action Status](https://img.shields.io/github/actions/workflow/status/mulertech/array-manipulation/phpstan.yml?branch=main&label=phpstan&style=flat-square)](https://github.com/mulertech/array-manipulation/actions/workflows/phpstan.yml)
+[![Total Downloads](https://img.shields.io/packagist/dt/mulertech/array-manipulation.svg?style=flat-square)](https://packagist.org/packages/mulertech/array-manipulation)
+[![Test Coverage](https://raw.githubusercontent.com/mulertech/array-manipulation/main/badge-coverage.svg)](https://packagist.org/packages/mulertech/array-manipulation)
+___
 
 This class manipulates and organizes arrays
 

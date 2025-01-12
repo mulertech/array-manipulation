@@ -49,18 +49,18 @@ class ArrayManipulationTest extends TestCase
     public function testOrderByOneColumn()
     {
         $array = [
-            0 => ['firstcolumn' => 'apple', 'secondcolumn' => 'zorro'],
-            1 => ['firstcolumn' => 'banana', 'secondcolumn' => 'superman'],
-            2 => ['firstcolumn' => 'cherry', 'secondcolumn' => 'batman'],
-            3 => ['firstcolumn' => 'coconut', 'secondcolumn' => 'alibaba'],
-            4 => ['firstcolumn' => 'pineapple', 'secondcolumn' => 'Tom sawyer']
+            ['firstcolumn' => 'apple', 'secondcolumn' => 'zorro'],
+            ['firstcolumn' => 'banana', 'secondcolumn' => 'superman'],
+            ['firstcolumn' => 'cherry', 'secondcolumn' => 'batman'],
+            ['firstcolumn' => 'coconut', 'secondcolumn' => 'alibaba'],
+            ['firstcolumn' => 'pineapple', 'secondcolumn' => 'Tom sawyer']
         ];
         $expected = [
-            0 => ['firstcolumn' => 'coconut', 'secondcolumn' => 'alibaba'],
-            1 => ['firstcolumn' => 'cherry', 'secondcolumn' => 'batman'],
-            2 => ['firstcolumn' => 'banana', 'secondcolumn' => 'superman'],
-            3 => ['firstcolumn' => 'pineapple', 'secondcolumn' => 'Tom sawyer'],
-            4 => ['firstcolumn' => 'apple', 'secondcolumn' => 'zorro']
+            ['firstcolumn' => 'coconut', 'secondcolumn' => 'alibaba'],
+            ['firstcolumn' => 'cherry', 'secondcolumn' => 'batman'],
+            ['firstcolumn' => 'banana', 'secondcolumn' => 'superman'],
+            ['firstcolumn' => 'pineapple', 'secondcolumn' => 'Tom sawyer'],
+            ['firstcolumn' => 'apple', 'secondcolumn' => 'zorro']
         ];
         static::assertEquals($expected, ArrayManipulation::orderByColumn($array, 'secondcolumn'));
     }
