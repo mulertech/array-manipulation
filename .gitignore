@@ -2,6 +2,6 @@
 .phpunit.cache
 vendor
 .php-cs-fixer.cache
-.phpunit.result.cache
+clover.xml
 composer.lock
 mt-compose.yml
