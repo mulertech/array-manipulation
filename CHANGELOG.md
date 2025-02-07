@@ -1,5 +1,9 @@
 # Release notes for array-manipulation
 
+## v2.0.2 - 2025-02-07
+
+v2.0.2
+
 ## v2.0.1 - 2024-12-29
 
 v2.0.1
