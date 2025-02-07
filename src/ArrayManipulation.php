@@ -136,11 +136,13 @@ class ArrayManipulation
     public static function addKeyValue(array $array, string $key, mixed $value, string ...$index): array
     {
         if (empty($index)) {
-            if (isset($array[$key]) && self::isList($array[$key])) {
+            // For list array
+            if (isset($array[$key]) && is_array($array[$key]) && self::isList($array[$key])) {
                 $array[$key][] = $value;
                 return $array;
             }
 
+            // For associative array or string value to replace
             $array[$key] = $value;
             return $array;
         }
