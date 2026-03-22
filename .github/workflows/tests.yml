@@ -78,7 +78,7 @@ jobs:
       - name: Install dependencies
         uses: ramsey/composer-install@v3
         with:
-          composer-options: '--prefer-stable'
+          composer-options: '--prefer-stable --ignore-platform-req=ext-posix'
 
       - name: Set PHPUnit
         shell: bash
