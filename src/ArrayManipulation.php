@@ -2,18 +2,15 @@
 
 namespace MulerTech\ArrayManipulation;
 
-use RuntimeException;
-
 /**
- * Class ArrayManipulation
- * @package MulerTech\ArrayManipulation
+ * Class ArrayManipulation.
+ *
  * @author Sébastien Muler
  */
 class ArrayManipulation
 {
     /**
      * @param array<int|string, mixed> $array
-     * @return bool
      */
     public static function isAssoc(array $array): bool
     {
@@ -22,7 +19,6 @@ class ArrayManipulation
 
     /**
      * @param array<int|string, mixed> $array
-     * @return bool
      */
     public static function isList(array $array): bool
     {
@@ -30,8 +26,10 @@ class ArrayManipulation
     }
 
     /**
-     * Find the duplicates and store it into the return array
+     * Find the duplicates and store it into the return array.
+     *
      * @param array<int|string, mixed> $array
+     *
      * @return array<int, mixed>
      */
     public static function listOfDuplicates(array $array = []): array
@@ -43,21 +41,21 @@ class ArrayManipulation
      * Add a number key and the current number :
      * Example : [0 => ['name' => 'toto'], 1 => ['name' => 'titi']]
      * Becomes : [0 => ['name' => 'toto', 'number' => 1], 1 => ['name' => 'titi', 'number' => 2]]
+     *
      * @param array<int, array<string, mixed>> $array
-     * @param string $indexNumber
+     *
      * @return array<int, array<string, mixed>>
      */
     public static function addNumberKey(array $array, string $indexNumber = 'number'): array
     {
         if (self::isAssoc($array)) {
-            throw new RuntimeException(
-                'Class ArrayManipulation, function addNumberKey. The array must be a list.'
-            );
+            throw new \RuntimeException('Class ArrayManipulation, function addNumberKey. The array must be a list.');
         }
 
         return array_map(
             static function ($value) use (&$i, $indexNumber) {
                 $value[$indexNumber] = ++$i;
+
                 return $value;
             },
             $array
@@ -66,9 +64,11 @@ class ArrayManipulation
 
     /**
      * Find differences between first and second array
-     * Return array : [key_name => [first_value, second_value]]
+     * Return array : [key_name => [first_value, second_value]].
+     *
      * @param array<int|string, mixed> $first
      * @param array<int|string, mixed> $second
+     *
      * @return array<int|string, array<int, mixed>>
      */
     public static function findDifferencesByName(array $first, array $second): array
@@ -87,10 +87,8 @@ class ArrayManipulation
 
     /**
      * @param array<int, array<string, mixed>> $array
-     * @param string $column
-     * @param string $order 'asc' or 'desc' order
-     * @param string|null $secondColumn
-     * @param string|null $secondOrder
+     * @param string                           $order 'asc' or 'desc' order
+     *
      * @return array<int, array<string, mixed>>
      */
     public static function orderByColumn(
@@ -98,19 +96,19 @@ class ArrayManipulation
         string $column,
         string $order = 'asc',
         ?string $secondColumn = null,
-        ?string $secondOrder = null
+        ?string $secondOrder = null,
     ): array {
         $arrayColumn = array_column($array, $column);
-        $sortOrder = (strtolower($order) === 'asc') ? SORT_ASC : SORT_DESC;
+        $sortOrder = ('asc' === strtolower($order)) ? SORT_ASC : SORT_DESC;
         $sortFlag = SORT_FLAG_CASE | SORT_STRING;
 
-        if ($secondColumn === null) {
+        if (null === $secondColumn) {
             array_multisort($arrayColumn, $sortOrder, $sortFlag, $array);
 
             return $array;
         }
 
-        $secondSort = ($secondOrder !== null && strtolower($secondOrder) === 'desc') ? SORT_DESC : SORT_ASC;
+        $secondSort = (null !== $secondOrder && 'desc' === strtolower($secondOrder)) ? SORT_DESC : SORT_ASC;
 
         array_multisort(
             $arrayColumn,
@@ -127,10 +125,9 @@ class ArrayManipulation
 
     /**
      * Add a key and its value into the array by following the key indexes.
+     *
      * @param array<int|string, mixed> $array
-     * @param string $key
-     * @param mixed $value
-     * @param string ...$index
+     *
      * @return array<int|string, mixed>
      */
     public static function addKeyValue(array $array, string $key, mixed $value, string ...$index): array
@@ -139,11 +136,13 @@ class ArrayManipulation
             // For list array
             if (isset($array[$key]) && is_array($array[$key]) && self::isList($array[$key])) {
                 $array[$key][] = $value;
+
                 return $array;
             }
 
             // For associative array or string value to replace
             $array[$key] = $value;
+
             return $array;
         }
 
@@ -156,8 +155,9 @@ class ArrayManipulation
 
     /**
      * Remove a key and its value into the array by following the key indexes.
+     *
      * @param array<int|string, mixed> $array
-     * @param string ...$index
+     *
      * @return array<int|string, mixed>
      */
     public static function removeKey(array $array, string ...$index): array
