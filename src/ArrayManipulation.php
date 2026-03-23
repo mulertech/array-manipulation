@@ -28,9 +28,9 @@ class ArrayManipulation
     /**
      * Find the duplicates and store it into the return array.
      *
-     * @param array<int|string, mixed> $array
+     * @param array<int|string, int|float|string|bool> $array
      *
-     * @return array<int, mixed>
+     * @return array<int, int|float|string|bool>
      */
     public static function listOfDuplicates(array $array = []): array
     {
@@ -66,10 +66,10 @@ class ArrayManipulation
      * Find differences between first and second array
      * Return array : [key_name => [first_value, second_value]].
      *
-     * @param array<int|string, mixed> $first
-     * @param array<int|string, mixed> $second
+     * @param array<int|string, int|float|string|bool> $first
+     * @param array<int|string, int|float|string|bool> $second
      *
-     * @return array<int|string, array<int, mixed>>
+     * @return array<int|string, array<int, int|float|string|bool>>
      */
     public static function findDifferencesByName(array $first, array $second): array
     {
@@ -148,6 +148,10 @@ class ArrayManipulation
 
         $firstIndex = array_shift($index);
 
+        if (!is_array($array[$firstIndex])) {
+            throw new \RuntimeException('Class ArrayManipulation, function addKeyValue. The value at index "'.$firstIndex.'" must be an array.');
+        }
+
         $array[$firstIndex] = self::addKeyValue($array[$firstIndex], $key, $value, ...$index);
 
         return $array;
@@ -169,6 +173,10 @@ class ArrayManipulation
         $firstIndex = array_shift($index);
 
         if (!empty($index) && !empty($array[$firstIndex])) {
+            if (!is_array($array[$firstIndex])) {
+                throw new \RuntimeException('Class ArrayManipulation, function removeKey. The value at index "'.$firstIndex.'" must be an array.');
+            }
+
             $array[$firstIndex] = self::removeKey($array[$firstIndex], ...$index);
 
             return $array;
