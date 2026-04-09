@@ -267,6 +267,20 @@ class ArrayManipulationTest extends TestCase
         $this->assertEquals($expected, ArrayManipulation::addKeyValue($test, 'keytoaddvalue', 'an other value', 'subtest3', 'othersub'));
     }
 
+    public function testAddKeyValueWithNonArrayIndex()
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Class ArrayManipulation, function addKeyValue. The value at index "key" must be an array.');
+        ArrayManipulation::addKeyValue(['key' => 'string value'], 'newkey', 'newvalue', 'key');
+    }
+
+    public function testRemoveKeyWithNonArrayIndex()
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Class ArrayManipulation, function removeKey. The value at index "key" must be an array.');
+        ArrayManipulation::removeKey(['key' => 'string value'], 'key', 'subkey');
+    }
+
     public function testRemoveSimpleKey()
     {
         $test = [
